@@ -133,16 +133,4 @@ Acesse `http://localhost:5678`, importe os arquivos da pasta `/n8n`, configure s
 | `POST` | `/ask` | Recebe `{"subject_name": "IHC", "question": "..."}` e retorna a resposta gerada via RAG. |
 | `GET` | `/events` | Lista os prazos e avaliações cadastrados para os próximos dias. |
 
----
 
-## Capturas de Tela
-
-![Painel Web Radar Estudos IFB](docs/screenshot-web.png)
-
-![Interação no Telegram Bot](docs/screenshot-telegram.png)
-
----
-
-## Autoria
-
-Desenvolvido por **Catharina Napoleão** — Estudante de Ciência da Computação (IFB) e Tecnóloga em Análise e Desenvolvimento de Sistemas.
