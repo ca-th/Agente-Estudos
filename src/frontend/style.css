@@ -1,0 +1,305 @@
+:root {
+  --bg: #0e151c;
+  --surface: #161f29;
+  --surface-2: #1d2833;
+  --line: #2a3745;
+  --text: #e7edf3;
+  --muted: #94a3b3;
+  --accent: #3fb68b;
+  --ink: #0b1218;
+  --violet: #9a8cff;
+  --amber: #f5b94a;
+  --green: #3fd0a0;
+  --pink: #ff7a9c;
+  --radius: 14px;
+  --radius-sm: 9px;
+  --font-head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* ---------- Cabeçalho ---------- */
+.header { margin-bottom: 36px; }
+
+.header h1 {
+  margin: 0 0 8px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.header h1::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 6px;
+  margin-top: 14px;
+  border-radius: 3px;
+  background: var(--pink);
+}
+
+.header p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack li {
+  --c: var(--violet);
+  padding: 4px 12px;
+  border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.stack li:nth-child(1) { --c: var(--green); }
+.stack li:nth-child(2) { --c: var(--violet); }
+.stack li:nth-child(3) { --c: var(--pink); }
+.stack li:nth-child(4) { --c: var(--amber); }
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.column {
+  display: grid;
+  gap: 24px;
+}
+
+.panel {
+  --tone: var(--green);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--tone);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.panel--upload { --tone: var(--violet); }
+.panel--radar  { --tone: var(--amber); }
+.panel--tutor  { --tone: var(--green); }
+
+.panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+}
+
+.panel h2::before {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tone);
+}
+
+.panel-desc {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 11px 20px;
+  font: 600 0.95rem var(--font-body);
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.btn-primary {
+  background: var(--tone);
+  color: var(--ink);
+}
+.btn-primary:hover { filter: brightness(1.12); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--tone);
+  color: var(--tone);
+  padding: 8px 14px;
+}
+.btn-ghost:hover { background: color-mix(in srgb, var(--tone) 16%, transparent); }
+
+.btn:focus-visible,
+.field input:focus-visible,
+.dropzone:focus-within {
+  outline: 2px solid var(--tone);
+  outline-offset: 2px;
+}
+
+/* ---------- Upload ---------- */
+.dropzone {
+  display: block;
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1.5px dashed var(--tone);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--tone) 10%, var(--surface));
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.dropzone:hover { background: color-mix(in srgb, var(--tone) 18%, var(--surface)); }
+
+.dropzone strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.dropzone input[type="file"] {
+  width: 100%;
+  color: var(--muted);
+  font: inherit;
+}
+
+.dropzone input[type="file"]::file-selector-button {
+  margin-right: 12px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--tone);
+  color: var(--ink);
+  font: 600 0.9rem var(--font-body);
+  cursor: pointer;
+}
+
+/* ---------- Radar de prazos ---------- */
+.deadlines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.empty {
+  padding: 22px 16px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ---------- Tutor ---------- */
+.field { display: grid; gap: 6px; margin-bottom: 16px; }
+.field label { font-weight: 600; font-size: 0.9rem; }
+
+.field input,
+.ask input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font: 1rem var(--font-body);
+}
+
+.field input::placeholder,
+.ask input::placeholder { color: #66778a; }
+
+.field input:focus,
+.ask input:focus {
+  outline: 2px solid var(--tone);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 260px;
+  max-height: 480px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.chat-empty {
+  margin: auto;
+  max-width: 38ch;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.ask {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .page { padding: 32px 16px 48px; }
+  .layout { grid-template-columns: 1fr; }
+  .panel { padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  .ask { grid-template-columns: 1fr; }
+  .panel-head { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

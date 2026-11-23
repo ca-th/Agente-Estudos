@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Radar Estudos IFB — Assistente Acadêmico RAG</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="header">
+      <h1>Radar Estudos IFB</h1>
+      <p>Gestão de prazos, ingestão de planos de ensino e tutoria via RAG.</p>
+      <ul class="stack" aria-label="Tecnologias usadas">
+        <li>FastAPI</li>
+        <li>pgvector</li>
+        <li>n8n</li>
+        <li>Telegram Bot</li>
+      </ul>
+    </header>
+
+    <div class="layout">
+
+      <div class="column">
+
+        <section class="panel panel--upload" aria-labelledby="titulo-upload">
+          <h2 id="titulo-upload">Cadastrar plano de ensino</h2>
+          <p class="panel-desc">Envie o plano da disciplina para extrair as datas e indexar o conteúdo.</p>
+
+          <label class="dropzone" for="pdfFile">
+            <strong>Escolha o plano de ensino em PDF</strong>
+            <input id="pdfFile" type="file" accept="application/pdf" />
+          </label>
+
+          <button id="btnUpload" class="btn btn-primary" type="button">Processar PDF</button>
+        </section>
+
+        <section class="panel panel--radar" aria-labelledby="titulo-radar">
+          <div class="panel-head">
+            <div>
+              <h2 id="titulo-radar">Radar de prazos</h2>
+              <p class="panel-desc">Próximos 15 dias</p>
+            </div>
+            <button id="btnRefresh" class="btn btn-ghost" type="button">Atualizar</button>
+          </div>
+
+          <ul id="events" class="deadlines">
+            <li class="empty">
+              Nenhum prazo carregado. Conecte uma rota <code>GET /events</code> no FastAPI para exibir os prazos aqui.
+            </li>
+          </ul>
+        </section>
+
+      </div>
+
+      <section class="panel panel--tutor" aria-labelledby="titulo-tutor">
+        <h2 id="titulo-tutor">Tutor por disciplina</h2>
+        <p class="panel-desc">Consulte conteúdos, critérios de avaliação e datas nos documentos indexados.</p>
+
+        <div class="field">
+          <label for="subject">Disciplina</label>
+          <input id="subject" type="text" placeholder="Ex.: IHC" />
+        </div>
+
+        <div id="chatLog" class="chat-log" aria-live="polite">
+          <p class="chat-empty">
+            Informe a sigla ou o nome da matéria e pergunte sobre o plano de ensino ou os slides.
+          </p>
+        </div>
+
+        <div class="ask">
+          <input id="question" type="text" placeholder="Digite sua dúvida sobre a matéria" aria-label="Sua dúvida" />
+          <button id="btnAsk" class="btn btn-primary" type="button">Enviar</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
